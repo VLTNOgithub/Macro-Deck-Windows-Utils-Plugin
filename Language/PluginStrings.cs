@@ -22,6 +22,10 @@ public class PluginStrings
     public string ActionStartApplicationDescription = "Start a application with and without start arguments";
     public string ActionExplorerControl = "Explorer control";
     public string ActionExplorerControlDescription = "Explorer/browser (back/forward/home/refresh)";
+    public string ActionNotification = "Send notification";
+    public string ActionNotificationDescription = "Send a notification with a custom title and message";
+    public string ActionMuteMicrophone = "Mute microphone";
+    public string ActionMuteMicrophoneDescription = "Mute the default microphone";
     public string Path = "Path";
     public string Arguments = "Arguments";
     public string ChooseAFileOrDragAndDrop = "Choose a file or drag and drop it here";
@@ -52,5 +56,6 @@ public class PluginStrings
     public string MethodStart = "Start";
     public string MethodStartStop = "Start/Stop";
     public string MethodStartFocus = "Start/Focus";
-
+    public string Message = "Message";
+    public string Title = "Title";
 }

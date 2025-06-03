@@ -34,7 +34,6 @@ public class ApplicationLauncher
     static extern bool CloseHandle(IntPtr hObject);
 
 
-    private const int SW_MINIMIZE = 0;
     private const int SW_RESTORE = 9;
 
 
@@ -77,32 +76,33 @@ public class ApplicationLauncher
     {
         path = WindowsShortcut.GetShortcutTarget(path);
         if (!IsRunning(path)) return;
-        var p = GetProcessByPath(path);
-        if (p == null) return;
 
-        IntPtr handle = p.MainWindowHandle;
-        
-        ShowWindow(handle, 5);
-	ShowWindow(handle, 10);
-        
-        if (!IsIconic(handle))
+        var processes = Process.GetProcesses()
+            .Where(p => GetProcessFileName(p.Id).Equals(path, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        // Try to find a process with a valid main window handle
+        foreach (var proc in processes.OrderByDescending(p => p.Id))
         {
-                return;
+            IntPtr handle = proc.MainWindowHandle;
+            if (handle == IntPtr.Zero) continue;
+
+            // If the window is minimized, restore it
+            if (IsIconic(handle))
+            {
+                ShowWindow(handle, SW_RESTORE);
+            }
+
+            SetForegroundWindow(handle);
+
+            return;
         }
-        MinimizeAndRestoreWindow(handle); // Fallback function
     }
 
     public static Process GetProcessByPath(string path)
     {
         path = WindowsShortcut.GetShortcutTarget(path);
         return Process.GetProcesses().ToArray().Where(p => GetProcessFileName(p.Id).Equals(path, StringComparison.OrdinalIgnoreCase)).OrderByDescending(p => p.Id).FirstOrDefault();
-    }
-
-
-    private static void MinimizeAndRestoreWindow(IntPtr hWnd)
-    {
-        ShowWindow(hWnd, SW_MINIMIZE);
-        ShowWindow(hWnd, SW_RESTORE);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

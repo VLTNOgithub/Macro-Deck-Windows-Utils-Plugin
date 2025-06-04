@@ -26,6 +26,8 @@ public class PluginStrings
     public string ActionNotificationDescription = "Send a notification with a custom title and message";
     public string ActionMuteMicrophone = "Mute microphone";
     public string ActionMuteMicrophoneDescription = "Mute the default microphone";
+    public string ActionPowerOption = "Power option";
+    public string ActionPowerOptionDescription = "Turn off your computer based on the power option";
     public string Path = "Path";
     public string Arguments = "Arguments";
     public string ChooseAFileOrDragAndDrop = "Choose a file or drag and drop it here";

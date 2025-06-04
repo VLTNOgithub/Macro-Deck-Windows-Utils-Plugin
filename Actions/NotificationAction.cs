@@ -6,8 +6,8 @@ using SuchByte.WindowsUtils.GUI;
 using SuchByte.WindowsUtils.Language;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Diagnostics;
 using SuchByte.MacroDeck.Notifications;
+using SuchByte.MacroDeck.Logging;
 
 namespace SuchByte.WindowsUtils.Actions;
 
@@ -35,7 +35,7 @@ public class NotificationAction : PluginAction
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e.Message);
+                MacroDeckLogger.Error(Main.Instance, e.Message);
             }
         }
     }

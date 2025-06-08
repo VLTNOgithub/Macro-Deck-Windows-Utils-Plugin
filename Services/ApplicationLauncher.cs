@@ -12,17 +12,6 @@ namespace SuchByte.WindowsUtils.Services;
 
 public class ApplicationLauncher
 {
-    [DllImport("user32.dll")]
-    public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool SetForegroundWindow(IntPtr hWnd);
-
-    [DllImport("user32.dll")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    static extern bool IsIconic(IntPtr hWnd);
-
     [DllImport("kernel32.dll")]
     public static extern IntPtr OpenProcess(uint processAccess, bool bInheritHandle, int processId);
 
@@ -32,9 +21,6 @@ public class ApplicationLauncher
     [DllImport("kernel32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     static extern bool CloseHandle(IntPtr hObject);
-
-
-    private const int SW_RESTORE = 9;
 
 
     public static void StartApplication(string path, string arguments, bool asAdmin)
@@ -87,13 +73,7 @@ public class ApplicationLauncher
             IntPtr handle = proc.MainWindowHandle;
             if (handle == IntPtr.Zero) continue;
 
-            // If the window is minimized, restore it
-            if (IsIconic(handle))
-            {
-                ShowWindow(handle, SW_RESTORE);
-            }
-
-            SetForegroundWindow(handle);
+            WindowActivator.ForceActivateWindow(handle);
 
             return;
         }

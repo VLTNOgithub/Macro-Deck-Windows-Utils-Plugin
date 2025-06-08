@@ -33,7 +33,7 @@ partial class PowerOptionSelector
         powerOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         powerOption.Font = new System.Drawing.Font("Tahoma", 9.75F);
         powerOption.Icon = null;
-        powerOption.Location = new System.Drawing.Point(183, 65);
+        powerOption.Location = new System.Drawing.Point(183, 63);
         powerOption.Name = "powerOption";
         powerOption.Padding = new System.Windows.Forms.Padding(8, 2, 8, 2);
         powerOption.SelectedIndex = -1;
@@ -44,7 +44,7 @@ partial class PowerOptionSelector
         // lblPowerOption
         // 
         lblPowerOption.Font = new System.Drawing.Font("Tahoma", 11.25F);
-        lblPowerOption.Location = new System.Drawing.Point(3, 63);
+        lblPowerOption.Location = new System.Drawing.Point(0, 63);
         lblPowerOption.Name = "lblPowerOption";
         lblPowerOption.Size = new System.Drawing.Size(174, 29);
         lblPowerOption.TabIndex = 8;
